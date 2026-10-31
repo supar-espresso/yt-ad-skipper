@@ -1,2 +1,2 @@
 # yt-ad-skipper
-skips YouTube adds
+skips YouTube ads
