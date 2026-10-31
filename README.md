@@ -1,5 +1,5 @@
 # yt-ad-skipper
-skips YouTube ads
+vibe-coded browser extension that skips YouTube ads
 
 ## Install (2 minutes)
 
