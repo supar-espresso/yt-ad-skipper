@@ -3,6 +3,7 @@
   let enabled = true;
   let inAd = false;
   let saved = null; // the user's mute/speed settings from before the ad
+  let nagSeen = false; // resume once per anti-adblock pop-up, never force-play
 
   const SKIP_BUTTONS = [
     ".ytp-skip-ad-button",
@@ -49,24 +50,39 @@
       saved = null;
     }
 
-    // If the "ad blockers are not allowed" pop-up paused the video, resume it.
+    // If the "ad blockers are not allowed" pop-up paused the video, resume it once.
     const nag = document.querySelector("ytd-enforcement-message-view-model");
-    if (nag) {
+    if (nag && !nagSeen) {
+      nagSeen = true;
       nag.closest("tp-yt-paper-dialog")?.remove();
       document.querySelector("tp-yt-iron-overlay-backdrop")?.remove();
       if (video && video.paused) video.play().catch(() => {});
+    } else if (!nag) {
+      nagSeen = false;
     }
   }
 
   function countSkip() {
-    chrome.storage.local.get({ skipped: 0 }, (s) =>
-      chrome.storage.local.set({ skipped: s.skipped + 1 })
-    );
+    // The background script does the counting so tabs can't overwrite each other.
+    try {
+      chrome.runtime.sendMessage({ type: "adSkipped" }).catch(() => {});
+    } catch {} // extension was reloaded; this old copy of the script can't talk to it
   }
 
-  // React fast to page changes, with a timer as a backup.
+  // Run at most once per frame however often YouTube changes the page,
+  // with a timer as a backup (frames pause in background tabs).
+  let queued = false;
+  const schedule = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      tick();
+    });
+  };
+
   const start = () => {
-    new MutationObserver(tick).observe(document.documentElement, {
+    new MutationObserver(schedule).observe(document.documentElement, {
       childList: true, subtree: true, attributes: true, attributeFilter: ["class"],
     });
     setInterval(tick, 300);
