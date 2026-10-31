@@ -1,6 +1,9 @@
 # yt-ad-skipper
 vibe-coded browser extension that skips YouTube ads
 
+> ⚠️ **For Google Chrome on desktop only** (Windows, Mac, Linux).
+> It does not work in the YouTube phone/TV apps or in Chrome on Android/iPhone.
+
 ## Install (2 minutes)
 
 1. Unzip `yt-adblock.zip` somewhere permanent (e.g. Documents/yt-adblock). Don't delete the folder afterwards, because Chrome loads the extension from it.
