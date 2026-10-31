@@ -1,0 +1,33 @@
+/* Only active while <html> has the class "ytab-on" (set by content.js). */
+html.ytab-on #masthead-ad,
+html.ytab-on #player-ads,
+html.ytab-on ytd-ad-slot-renderer,
+html.ytab-on ytd-in-feed-ad-layout-renderer,
+html.ytab-on ytd-banner-promo-renderer,
+html.ytab-on ytd-statement-banner-renderer,
+html.ytab-on ytd-video-masthead-ad-v3-renderer,
+html.ytab-on ytd-primetime-promo-renderer,
+html.ytab-on ytd-promoted-sparkles-web-renderer,
+html.ytab-on ytd-promoted-video-renderer,
+html.ytab-on ytd-compact-promoted-video-renderer,
+html.ytab-on ytd-display-ad-renderer,
+html.ytab-on ytd-action-companion-ad-renderer,
+html.ytab-on ytd-player-legacy-desktop-watch-ads-renderer,
+html.ytab-on ytd-merch-shelf-renderer,
+html.ytab-on ytd-search-pyv-renderer,
+html.ytab-on ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
+html.ytab-on ytd-rich-section-renderer:has(ytd-statement-banner-renderer),
+html.ytab-on ytd-reel-video-renderer:has(ytd-ad-slot-renderer),
+html.ytab-on ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"],
+html.ytab-on .ytp-ad-overlay-container,
+html.ytab-on .ytp-ad-image-overlay,
+html.ytab-on .ytp-ad-text-overlay,
+html.ytab-on ytd-enforcement-message-view-model,
+html.ytab-on tp-yt-paper-dialog:has(ytd-enforcement-message-view-model) {
+  display: none !important;
+}
+
+/* Hide the ad picture while it is being fast-forwarded. */
+html.ytab-on #movie_player.ad-showing video {
+  opacity: 0 !important;
+}

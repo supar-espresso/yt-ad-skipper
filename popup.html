@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { width: 220px; margin: 0; padding: 16px; font: 14px system-ui, sans-serif; background: #181818; color: #f1f1f1; }
+  h1 { font-size: 15px; margin: 0 0 14px; display: flex; align-items: center; gap: 8px; }
+  h1 img { width: 20px; }
+  .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .switch { position: relative; width: 40px; height: 22px; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; inset: 0; background: #555; border-radius: 22px; cursor: pointer; transition: .2s; }
+  .slider::before { content: ""; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+  input:checked + .slider { background: #e53935; }
+  input:checked + .slider::before { transform: translateX(18px); }
+  .count { font-size: 28px; font-weight: 700; }
+  .muted { color: #aaa; font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1><img src="icons/48.png" alt="">YT Ad Skipper</h1>
+  <div class="row">
+    <span>Blocking</span>
+    <label class="switch"><input type="checkbox" id="toggle"><span class="slider"></span></label>
+  </div>
+  <div class="count" id="count">0</div>
+  <div class="muted">video ads skipped</div>
+  <script src="popup.js"></script>
+</body>
+</html>
